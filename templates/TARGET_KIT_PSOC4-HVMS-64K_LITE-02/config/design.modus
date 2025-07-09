@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration app="BACKEND" formatVersion="14" lastSavedWith="Configurator Backend" lastSavedWithVersion="3.50.0" toolsPackage="ModusToolbox 3.5.0" xmlns="http://cypress.com/xsd/cydesignfile_v5">
     <Devices>
-        <Device mpn="CY8C4147LWE-HVS135X">
+        <Device mpn="CY8C4146LWE-HVS015X">
             <BlockConfig>
                 <Block location="ioss[0].port[0].pin[1]">
                     <Aliases>
@@ -254,9 +254,9 @@
                         </Aliases>
                     </Block>
                     <Parameters>
-                        <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
+                        <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="inFlash" value="true"/>
-                        <Param id="initialState" value="1"/>
+                        <Param id="initialState" value="0"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="portLevelConfig" value="false"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
@@ -382,8 +382,8 @@
                     </Block>
                     <Parameters>
                         <Param id="calc" value="man"/>
-                        <Param id="desFreq" value="10000000.000000"/>
-                        <Param id="fracDivider" value="13"/>
+                        <Param id="desFreq" value="24000000.000000"/>
+                        <Param id="fracDivider" value="0"/>
                         <Param id="intDivider" value="2"/>
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
@@ -408,16 +408,6 @@
                         <Param id="calc" value="man"/>
                         <Param id="desFreq" value="24000000.000000"/>
                         <Param id="fracDivider" value="0"/>
-                        <Param id="intDivider" value="17"/>
-                        <Param id="startOnReset" value="true"/>
-                    </Parameters>
-                </Personality>
-                <Personality template="m0s8peripheralclock" version="1.0">
-                    <Block location="peri[0].div_16_5[2]" locked="true"/>
-                    <Parameters>
-                        <Param id="calc" value="man"/>
-                        <Param id="desFreq" value="24000000.000000"/>
-                        <Param id="fracDivider" value="12"/>
                         <Param id="intDivider" value="17"/>
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
@@ -477,6 +467,13 @@
                 <Personality template="m0s8sysclocks" version="2.0">
                     <Block location="srss[0].clock[0]" locked="true"/>
                 </Personality>
+                <Personality template="m0s8altsystick" version="1.0">
+                    <Block location="srss[0].clock[0].altsystickclk[0]" locked="true"/>
+                    <Parameters>
+                        <Param id="Reload" value="40000"/>
+                        <Param id="sourceClock" value="LFCLK"/>
+                    </Parameters>
+                </Personality>
                 <Personality template="m0s8hfclk" version="3.0">
                     <Block location="srss[0].clock[0].hfclk[0]" locked="true"/>
                     <Parameters>
@@ -494,6 +491,12 @@
                         <Param id="trim" value="2"/>
                     </Parameters>
                 </Personality>
+                <Personality template="m0s8lfclk" version="1.0">
+                    <Block location="srss[0].clock[0].lfclk[0]" locked="true"/>
+                    <Parameters>
+                        <Param id="sourceClock" value="ILO"/>
+                    </Parameters>
+                </Personality>
                 <Personality template="m0s8pumpclk" version="2.0">
                     <Block location="srss[0].clock[0].pumpclk[0]" locked="true"/>
                     <Parameters>
@@ -509,13 +512,13 @@
                 <Personality template="m0s8power" version="1.0">
                     <Block location="srss[0].power[0]" locked="true"/>
                     <Parameters>
-                        <Param id="AmuxPumpEn" value="false"/>
+                        <Param id="AmuxPumpEn" value="true"/>
                         <Param id="HVBodEn" value="true"/>
                         <Param id="VccOVDEn" value="false"/>
                         <Param id="VddOVDEn" value="false"/>
                         <Param id="deepsleepLatency" value="0"/>
                         <Param id="idlePwrMode" value="CY_CFG_PWR_MODE_DEEPSLEEP"/>
-                        <Param id="vddaMv" value="5000"/>
+                        <Param id="vddaMv" value="3300"/>
                     </Parameters>
                 </Personality>
                 <Personality template="m0s8counter" version="1.0">
@@ -551,7 +554,7 @@
                     <Parameters>
                         <Param id="CaptureInput" value="CY_TCPWM_INPUT_DISABLED"/>
                         <Param id="ClockPrescaler" value="CY_TCPWM_COUNTER_PRESCALER_DIVBY_1"/>
-                        <Param id="Compare0" value="32768"/>
+                        <Param id="Compare0" value="16384"/>
                         <Param id="Compare1" value="16384"/>
                         <Param id="CompareOrCapture" value="CY_TCPWM_COUNTER_MODE_CAPTURE"/>
                         <Param id="CountDirection" value="CY_TCPWM_COUNTER_COUNT_UP"/>
